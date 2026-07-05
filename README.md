@@ -180,6 +180,22 @@ Today four binaries claim the name `hanzo` (Go `cloud/cmd/hanzo`, Rust
   aliases so only `@hanzo/cli` provides `hanzo`. Rust-native equivalents:
   crate `hanzo-cli` (bin `hanzo`), crate `hanzo-dev` (bin `dev`), MCP `rust/`.
 
+## SDK docs (hanzo-docs integration)
+
+Per-language SDK docs are **generated**, never hand-written, into the reserved
+slot in the unified docs hub (`hanzo-docs/docs`, a Fumadocs fork → one CF Pages
+build):
+
+- Output path: `content/docs/sdks/<lang>/` (slots exist for
+  python|typescript|go|rust|c). The driver writes there when `DOCS_ROOT` points
+  at `.../content/docs/sdks`; that output dir is **gitignored** in hanzo-docs
+  (like the openapi-generated pages) — regenerate, never edit.
+- Scope: **language-specific usage/quickstart + typed-client reference only**
+  (how to install, construct the client, pick the ZAP-native vs HTTP-fallback
+  transport, call a method). It **links to** the canonical API reference —
+  which is owned and generated from `hanzoai/openapi` (36 specs → pages) — and
+  MUST NOT re-list endpoints. One way, no duplication.
+
 ## How to run (reproducible)
 
 ```bash
