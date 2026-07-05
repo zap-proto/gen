@@ -1,0 +1,349 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Tasks",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.hanzo.ai/v1"
+    }
+  ],
+  "paths": {
+    "/tasks/start-workflow": {
+      "post": {
+        "operationId": "tasks.startWorkflow",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StartWorkflowResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartWorkflowRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/signal-workflow": {
+      "post": {
+        "operationId": "tasks.signalWorkflow",
+        "responses": {
+          "200": {
+            "description": "OK — no response body."
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignalWorkflowRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/describe-workflow": {
+      "post": {
+        "operationId": "tasks.describeWorkflow",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DescribeWorkflowResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DescribeWorkflowRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/health": {
+      "post": {
+        "operationId": "tasks.health",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DescribeWorkflowRequest": {
+        "type": "object",
+        "properties": {
+          "namespace": {
+            "type": "string"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "runId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "namespace",
+          "workflowId",
+          "runId"
+        ],
+        "additionalProperties": false
+      },
+      "DescribeWorkflowResponse": {
+        "type": "object",
+        "properties": {
+          "info": {
+            "$ref": "#/components/schemas/WorkflowExecutionInfo"
+          }
+        },
+        "required": [
+          "info"
+        ],
+        "additionalProperties": false
+      },
+      "HealthResponse": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "service",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "SignalWorkflowRequest": {
+        "type": "object",
+        "properties": {
+          "namespace": {
+            "type": "string"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "runId": {
+            "type": "string"
+          },
+          "signalName": {
+            "type": "string"
+          },
+          "input": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "required": [
+          "namespace",
+          "workflowId",
+          "runId",
+          "signalName",
+          "input"
+        ],
+        "additionalProperties": false
+      },
+      "StartWorkflowRequest": {
+        "type": "object",
+        "properties": {
+          "namespace": {
+            "type": "string"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "taskQueue": {
+            "type": "string"
+          },
+          "input": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "required": [
+          "namespace",
+          "workflowId",
+          "taskQueue",
+          "input"
+        ],
+        "additionalProperties": false
+      },
+      "StartWorkflowResponse": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "runId"
+        ],
+        "additionalProperties": false
+      },
+      "WorkflowExecution": {
+        "type": "object",
+        "properties": {
+          "workflowId": {
+            "type": "string"
+          },
+          "runId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "workflowId",
+          "runId"
+        ],
+        "additionalProperties": false
+      },
+      "WorkflowExecutionInfo": {
+        "type": "object",
+        "properties": {
+          "execution": {
+            "$ref": "#/components/schemas/WorkflowExecution"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WorkflowType"
+          },
+          "startTimeMs": {
+            "type": "string",
+            "format": "int64"
+          },
+          "closeTimeMs": {
+            "type": "string",
+            "format": "int64"
+          },
+          "status": {
+            "type": "integer",
+            "format": "uint8",
+            "minimum": 0,
+            "maximum": 255
+          },
+          "historyLength": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "execution",
+          "type",
+          "startTimeMs",
+          "closeTimeMs",
+          "status",
+          "historyLength"
+        ],
+        "additionalProperties": false
+      },
+      "WorkflowType": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}
