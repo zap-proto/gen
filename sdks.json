@@ -12,7 +12,7 @@
       "emit_backend": "canonical (Go zapgen)",
       "http_fallback": "oapi-codegen | stainless",
       "sdk_repo": "github.com/hanzoai/go-sdk",
-      "status": "priority-1-proof"
+      "status": "tier1-PROVEN (oapi-codegen client from .zap-derived OpenAPI: go build/vet/test green)"
     },
     "rust": {
       "runtime": "zap-proto/rust (crate zap-protocol)",
@@ -26,14 +26,14 @@
       "emit_backend": "TODO emit-python",
       "http_fallback": "openapi-python-client | stainless (hanzoai)",
       "sdk_repo": "github.com/hanzoai/python-sdk (package hanzoai — BACK-COMPAT LOCKED)",
-      "status": "priority-1-proof"
+      "status": "tier1-PROVEN (hanzoai __all__ byte-identical; opt-in ZAP transport via hanzo-zap; 9/9 tests; live /v1/models 200; branch feat/zap-transport)"
     },
     "typescript": {
       "runtime": "@zap-proto/zap",
       "emit_backend": "exists (emit.ts)",
       "http_fallback": "openapi-typescript",
       "sdk_repo": "github.com/hanzoai/js-sdk",
-      "status": "zap-native"
+      "status": "tier2-PROVEN (zapgen View/Builder + TasksClient/Server + OpenAPI; tsc --noEmit clean)"
     },
     "cpp": {
       "runtime": "zap-proto/cpp",
