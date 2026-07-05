@@ -1,0 +1,60 @@
+{
+  "_comment": "Language matrix for zap-proto/gen. TWO TIERS: tier1 = OpenAPI/HTTP client + swappable transport (ZAP-native via zap-proto/http where a native transport exists, else HTTPS/WS/SSE) — available for all langs now; tier2 = zapgen zero-copy native View/Builder/Client (needs a native-ZAP runtime AND a zapgen emit backend). status reflects tier2 readiness. Regenerate with bin/zapsdk <lang> <schema>.",
+  "generator": {
+    "tool": "zapgen",
+    "canonical": "github.com/zap-proto/go/cmd/zapgen",
+    "reference_impl": "github.com/zap-proto/js src/zapgen (emit.ts is the emit-backend reference)",
+    "emits": ["ts", "openapi"]
+  },
+  "languages": {
+    "go": {
+      "runtime": "github.com/zap-proto/go",
+      "emit_backend": "canonical (Go zapgen)",
+      "http_fallback": "oapi-codegen | stainless",
+      "sdk_repo": "github.com/hanzoai/go-sdk",
+      "status": "priority-1-proof"
+    },
+    "rust": {
+      "runtime": "zap-proto/rust (crate zap-protocol)",
+      "emit_backend": "TODO emit-rust",
+      "http_fallback": "progenitor",
+      "sdk_repo": "github.com/hanzoai/rust-sdk",
+      "status": "priority-1-proof"
+    },
+    "python": {
+      "runtime": "zap-proto (py) + hanzo-zap CloudClient",
+      "emit_backend": "TODO emit-python",
+      "http_fallback": "openapi-python-client | stainless (hanzoai)",
+      "sdk_repo": "github.com/hanzoai/python-sdk (package hanzoai — BACK-COMPAT LOCKED)",
+      "status": "priority-1-proof"
+    },
+    "typescript": {
+      "runtime": "@zap-proto/zap",
+      "emit_backend": "exists (emit.ts)",
+      "http_fallback": "openapi-typescript",
+      "sdk_repo": "github.com/hanzoai/js-sdk",
+      "status": "zap-native"
+    },
+    "cpp": {
+      "runtime": "zap-proto/cpp",
+      "emit_backend": "TODO emit-cpp",
+      "http_fallback": "openapi-generator (cpp-restsdk)",
+      "sdk_repo": "TODO hanzoai/cpp-sdk",
+      "status": "scaffold"
+    },
+    "ruby": {
+      "runtime": "zap-proto/ruby (capn_proto.gemspec)",
+      "emit_backend": "TODO emit-ruby",
+      "http_fallback": "openapi-generator (ruby)",
+      "sdk_repo": "TODO hanzoai/ruby-sdk",
+      "status": "scaffold"
+    },
+    "php": {
+      "runtime": "NONE (needs zap-proto/php)",
+      "emit_backend": "n/a until runtime",
+      "http_fallback": "openapi-generator (php)",
+      "sdk_repo": "TODO hanzoai/php-sdk",
+      "status": "fallback-only"
+    }
+  }
+}
